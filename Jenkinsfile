@@ -40,7 +40,7 @@ pipeline {
                 docker { image 'lacework/lacework-cli:latest' }
             }
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 echo 'Running Lacework vulnerability scan'
