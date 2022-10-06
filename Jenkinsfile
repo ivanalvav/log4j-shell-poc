@@ -25,14 +25,14 @@ pipeline {
             }
             steps {
                 script {
-                    
+
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
-                    
+
                 }
             }
         }
-        /*stage('Lacework Vulnerability Scan') {
+        stage('Lacework Vulnerability Scan') {
             environment {
                 LW_API_SECRET = credentials('lacework_api_secret')
             }
@@ -45,16 +45,16 @@ pipeline {
             steps {
                 echo 'Running Lacework vulnerability scan'
                 sh "lacework vulnerability container scan index.docker.io $DOCKER_HUB/lacework-cli latest --poll --noninteractive --details " //--fail_on_severity critical --fail_on_severity high --fail_on_severity medium"
-                
+
             }
 
-        }*/
+        }
 
-        
+
         stage('Prisma Scan'){
-            
-                
-            
+
+
+
 
             steps {
 
@@ -65,14 +65,14 @@ pipeline {
                 //prismaCloudScanImage  dockerAddress: "unix:///var/run/docker.sock", image: "$DOCKER_HUB/lacework-cli", logLevel: 'debug', resultsFile: 'prisma-cloud-scan-results.json'
                 // Scan the image
 
-                
-                prismaCloudScanImage ca: '/certs/ca/cert.pem', 
-                                     cert: '/certs/client/cert.pem', 
-                                     dockerAddress: 'https://docker:2376', 
-                                     image: 'ivanorte/demolog4', 
-                                     key: '/certs/client/key.pem', 
-                                     logLevel: 'info', 
-                                     resultsFile: 'prisma-cloud-scan-results.json', 
+
+                prismaCloudScanImage ca: '/certs/ca/cert.pem',
+                                     cert: '/certs/client/cert.pem',
+                                     dockerAddress: 'https://docker:2376',
+                                     image: 'ivanorte/demolog4',
+                                     key: '/certs/client/key.pem',
+                                     logLevel: 'info',
+                                     resultsFile: 'prisma-cloud-scan-results.json',
                                      ignoreImageBuildTime: true
                  }
         }
